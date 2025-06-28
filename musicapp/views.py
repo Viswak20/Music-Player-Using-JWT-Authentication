@@ -37,7 +37,7 @@ def authenticate_credentails(email,password):
             payload = {
                     'user_id': user.id,
                     'email': user.email,
-                    'exp': datetime.utcnow() + timedelta(minutes=160),
+                    'exp': datetime.utcnow() + timedelta(minutes=60),
                     'iat': datetime.utcnow(),
                 }
             token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
