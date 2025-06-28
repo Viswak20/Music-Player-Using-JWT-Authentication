@@ -13,7 +13,7 @@ import time
 def login(request):
     return render(request,"login.html")
 
-@csrf_exempt
+@csrf_exempt 
 def authenticate_login(request):
     if request.method !='POST':
         return JsonResponse({"Error":"Inavalid Method"},staus=400)
