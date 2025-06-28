@@ -26,7 +26,7 @@ def authenticate_login(request):
             request.session['jwt'] = response
             return JsonResponse({'message': request.session['jwt']},status=200)
         else:
-            return JsonResponse({'Error': 'Invalid credentails or user not found'}, status=400)
+            return JsonResponse({'error': 'Invalid credentails or user not found'}, status=400)
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
     
@@ -37,7 +37,7 @@ def authenticate_credentails(email,password):
             payload = {
                     'user_id': user.id,
                     'email': user.email,
-                    'exp': datetime.utcnow() + timedelta(minutes=1),
+                    'exp': datetime.utcnow() + timedelta(minutes=160),
                     'iat': datetime.utcnow(),
                 }
             token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
@@ -62,7 +62,7 @@ def dashboard(request):
 
     except jwt.ExpiredSignatureError:
         return HttpResponse(""" Token Expired. Redirecting to Login Page...
-                            <script> setTimeout(function() { window.location.href = '/login/'; }, 5000); </script>
+                            <script> setTimeout(function() { window.location.href = '/login/'; }, 2000); </script>
                         """)
     except jwt.InvalidTokenError:
         return HttpResponse("Invalid Token Redirecting to Login. <script> setTimeout(function() { window.location.href=('/login/') },5000); </script>")
