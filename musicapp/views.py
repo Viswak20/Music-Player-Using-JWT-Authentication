@@ -49,8 +49,9 @@ def authenticate_credentails(email,password):
         return False
 
 def dashboard(request):
-    token = request.session['jwt']
-    if not token:
+    try:
+        token = request.session['jwt']
+    except:
         return redirect('login')
 
     try:
