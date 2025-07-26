@@ -16,7 +16,7 @@ def login(request):
 @csrf_exempt 
 def authenticate_login(request):
     if request.method !='POST':
-        return JsonResponse({"Error":"Inavalid Method"},staus=400)
+        return JsonResponse({"Error":"Invalid Method"},staus=400)
     try:
         data = json.loads(request.body)
         email=data['email']
@@ -49,11 +49,8 @@ def authenticate_credentails(email,password):
         return False
 
 def dashboard(request):
-    try:
-        token = request.session['jwt']
-    except:
-        return redirect('login')
 
+    token = request.session['jwt']
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
         user = User.objects.get(id=payload['user_id'])
@@ -67,3 +64,7 @@ def dashboard(request):
                         """)
     except jwt.InvalidTokenError:
         return HttpResponse("Invalid Token Redirecting to Login. <script> setTimeout(function() { window.location.href=('/login/') },5000); </script>")
+    
+def clearsession(request):
+    request.session.flush()
+    return redirect('login') 
