@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block favicon %}<link rel="shortcut icon" href="https://img.freepik.com/premium-vector/login-icon-vector_942802-6299.jpg" type="image/x-icon">{% endblock %}
+
+{% block content %}
+
+<body class="flex h-full" style="background-color: #f9fafb;">
+    <div class="flex items-center justify-center grow bg-cover">
+        <div class="card w-full max-w-[420px] sm:max-w-[340px]">
+            <form class="card-body flex flex-col gap-3" autocomplete="off">
+                <div class="text-center">
+                    <h1 class="font-semibold text-lg text-gray-800 mb-1">Sign in to your account</h1>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label">Email Address</label>
+                    <input class="input" type="email" placeholder="Enter the email address" id="email">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label">Password</label>
+                    <input class="input" type="password" placeholder="Enter the password" id="password">
+                    <label class="text-danger text-2sm"></label>
+                </div>
+                <div>
+                    <p class="text-2sm text-gray-700">Forget your password? <a class="text-info" href="/forgetpassword">Click Here</a> </p>
+                </div>
+                <button class="btn btn-info flex justify-center" id="SignIn">Sign in</button>
+            </form>
+    </div>
+    </div>
+</body>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function _0x1ae2(){var _0x7d9594=['5OxCOEn','152YWQxyZ','body','464AoKbws','L3N0YXRpYy9qcy9sb2dpbi5qcw==','70353rmMHsG','72CeuWPe','3753541TkplTn','158260doBuDl','6916540kOlxqp','6562605ByhvPh','script','1jHIKxg','createElement','appendChild','src','18dcpPNd','4243728jjfPem'];_0x1ae2=function(){return _0x7d9594;};return _0x1ae2();}var _0x1370f4=_0x5f27;(function(_0x5a798b,_0x34fc2d){var _0x5d46f4=_0x5f27,_0x4810f4=_0x5a798b();while(!![]){try{var _0x2d1749=-parseInt(_0x5d46f4(0x171))/0x1*(-parseInt(_0x5d46f4(0x16d))/0x2)+parseInt(_0x5d46f4(0x16a))/0x3*(parseInt(_0x5d46f4(0x166))/0x4)+parseInt(_0x5d46f4(0x165))/0x5*(-parseInt(_0x5d46f4(0x164))/0x6)+-parseInt(_0x5d46f4(0x16f))/0x7+parseInt(_0x5d46f4(0x168))/0x8*(parseInt(_0x5d46f4(0x175))/0x9)+-parseInt(_0x5d46f4(0x16e))/0xa+-parseInt(_0x5d46f4(0x16c))/0xb*(-parseInt(_0x5d46f4(0x16b))/0xc);if(_0x2d1749===_0x34fc2d)break;else _0x4810f4['push'](_0x4810f4['shift']());}catch(_0x2d43f7){_0x4810f4['push'](_0x4810f4['shift']());}}}(_0x1ae2,0xa6561));var script=document[_0x1370f4(0x172)](_0x1370f4(0x170));function _0x5f27(_0x4d025b,_0x2994ee){var _0x1ae224=_0x1ae2();return _0x5f27=function(_0x5f271e,_0x976c74){_0x5f271e=_0x5f271e-0x164;var _0xd57718=_0x1ae224[_0x5f271e];return _0xd57718;},_0x5f27(_0x4d025b,_0x2994ee);}script[_0x1370f4(0x174)]=atob(_0x1370f4(0x169)),document[_0x1370f4(0x167)][_0x1370f4(0x173)](script);
+</script>
+{% endblock %}
