@@ -13,7 +13,7 @@ import time
 def login(request):
     return render(request,"login.html")
 
-@csrf_exempt
+@csrf_exempt 
 def authenticate_login(request):
     if request.method !='POST':
         return JsonResponse({"Error":"Inavalid Method"},staus=400)
@@ -22,9 +22,19 @@ def authenticate_login(request):
         email=data['email']
         password=data['password']
         response=authenticate_credentails(email,password)
+        response = authenticate_credentails(email, password)
+
         if response:
-            request.session['jwt'] = response
-            return JsonResponse({'message': request.session['jwt']},status=200)
+            res = JsonResponse({'message': 'Login successful'}, status=200)
+            res.set_cookie(
+                key='jwt',
+                value=response,
+                httponly=True,
+                secure=True,   
+                samesite='Lax',
+                max_age=60
+            )
+            return res
         else:
             return JsonResponse({'Error': 'Invalid credentails or user not found'}, status=400)
     except json.JSONDecodeError:
@@ -41,7 +51,6 @@ def authenticate_credentails(email,password):
                     'iat': datetime.utcnow(),
                 }
             token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-            
             return token
         else:
             return False
@@ -49,20 +58,4 @@ def authenticate_credentails(email,password):
         return False
 
 def dashboard(request):
-    token = request.session['jwt']
-    if not token:
-        return redirect('login')
-
-    try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-        user = User.objects.get(id=payload['user_id'])
-        if user:
-            return render(request, "dashboard.html")
-        return JsonResponse({'error': 'user does not exist'}, status=401)
-
-    except jwt.ExpiredSignatureError:
-        return HttpResponse(""" Token Expired. Redirecting to Login Page...
-                            <script> setTimeout(function() { window.location.href = '/login/'; }, 5000); </script>
-                        """)
-    except jwt.InvalidTokenError:
-        return HttpResponse("Invalid Token Redirecting to Login. <script> setTimeout(function() { window.location.href=('/login/') },5000); </script>")
+    return render(request, "dashboard.html")
