@@ -1,7 +1,10 @@
-<<<<<<< HEAD:Music-Player-Using-JWT-Authentication/musicplayer/middleware.py
 from django.conf import settings
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
+import jwt
+from django.conf import settings
+from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
+from django.shortcuts import redirect
 
 class SelectiveAppendSlashMiddleware(MiddlewareMixin):
     def process_request(self, request):
@@ -12,11 +15,6 @@ class SelectiveAppendSlashMiddleware(MiddlewareMixin):
             return redirect(f"{request.path}/")
         
         return None
-=======
-import jwt
-from django.conf import settings
-from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
-from django.shortcuts import redirect
 
 class JWTAuthenticationMiddleware:
     def __init__(self, get_response):
@@ -40,4 +38,3 @@ class JWTAuthenticationMiddleware:
             return redirect('login')
 
         return self.get_response(request)
->>>>>>> ba151df64496fd9290701bf55554bc8884a122c8:musicplayer/middleware.py
