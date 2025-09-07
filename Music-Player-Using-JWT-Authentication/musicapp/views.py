@@ -49,20 +49,4 @@ def authenticate_credentails(email,password):
         return False
 
 def dashboard(request):
-    token = request.session['jwt']
-    if not token:
-        return redirect('login')
-
-    try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-        user = User.objects.get(id=payload['user_id'])
-        if user:
-            return render(request, "dashboard.html")
-        return JsonResponse({'error': 'user does not exist'}, status=401)
-
-    except jwt.ExpiredSignatureError:
-        return HttpResponse(""" Token Expired. Redirecting to Login Page...
-                            <script> setTimeout(function() { window.location.href = '/login/'; }, 5000); </script>
-                        """)
-    except jwt.InvalidTokenError:
-        return HttpResponse("Invalid Token Redirecting to Login. <script> setTimeout(function() { window.location.href=('/login/') },5000); </script>")
+    return render(request, "dashboard.html")
