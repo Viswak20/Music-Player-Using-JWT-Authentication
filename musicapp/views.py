@@ -13,7 +13,7 @@ import time
 def login(request):
     return render(request,"login.html")
 
-@csrf_exempt
+@csrf_exempt 
 def authenticate_login(request):
     if request.method !='POST':
         return JsonResponse({"Error":"Inavalid Method"},staus=400)
@@ -22,9 +22,19 @@ def authenticate_login(request):
         email=data['email']
         password=data['password']
         response=authenticate_credentails(email,password)
+        response = authenticate_credentails(email, password)
+
         if response:
-            request.session['jwt'] = response
-            return JsonResponse({'message': request.session['jwt']},status=200)
+            res = JsonResponse({'message': 'Login successful'}, status=200)
+            res.set_cookie(
+                key='jwt',
+                value=response,
+                httponly=True,
+                secure=True,   
+                samesite='Lax',
+                max_age=60
+            )
+            return res
         else:
             return JsonResponse({'Error': 'Invalid credentails or user not found'}, status=400)
     except json.JSONDecodeError:
@@ -41,7 +51,6 @@ def authenticate_credentails(email,password):
                     'iat': datetime.utcnow(),
                 }
             token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-            
             return token
         else:
             return False
@@ -49,4 +58,8 @@ def authenticate_credentails(email,password):
         return False
 
 def dashboard(request):
+<<<<<<< HEAD:Music-Player-Using-JWT-Authentication/musicapp/views.py
     return render(request, "dashboard.html")
+=======
+    return render(request, "dashboard.html")
+>>>>>>> ba151df64496fd9290701bf55554bc8884a122c8:musicapp/views.py
