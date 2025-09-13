@@ -1,20 +1,14 @@
 """
 WSGI config for musicplayer project.
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
+It exposes the WSGI callable as a module-level variable named `application`.
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
-from musicplayer import musicapp
 
+# Set the Django settings module
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'musicplayer.settings')
 
+# WSGI application callable
 application = get_wsgi_application()
-
-if __name__ == "__main__":
-    musicapp.run()
