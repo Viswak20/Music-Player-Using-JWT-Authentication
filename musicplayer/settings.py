@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-cf)5std@@_)v*!kl_h+yrh7ep3^s0n$i+le!=)k*4kv6%aidc9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['289f21af36a4.ngrok-free.app','127.0.0.1','https://music-player-using-jwt-authentication.onrender.com']
 
 
 # Application definition
