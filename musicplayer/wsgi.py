@@ -10,7 +10,11 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
+from musicplayer import musicapp
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'musicplayer.settings')
 
 application = get_wsgi_application()
+
+if __name__ == "__main__":
+    musicapp.run()
