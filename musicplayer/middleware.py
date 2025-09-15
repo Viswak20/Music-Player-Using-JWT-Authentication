@@ -1,6 +1,5 @@
 import jwt
 from django.conf import settings
-from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 from django.shortcuts import redirect
 
 class JWTAuthenticationMiddleware:
@@ -21,7 +20,7 @@ class JWTAuthenticationMiddleware:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
             request.user_id = payload.get('user_id')
             request.user_email = payload.get('email')
-        except (ExpiredSignatureError, InvalidTokenError):
+        except jwt.ExpiredSignatureError:
             return redirect('login')
-
-        return self.get_response(request)
+        except jwt.InvalidTokenError:
+            return redirect('login')
