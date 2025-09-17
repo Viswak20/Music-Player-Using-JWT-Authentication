@@ -58,8 +58,4 @@ def authenticate_credentails(email,password):
         return False
 
 def dashboard(request):
-<<<<<<< HEAD:Music-Player-Using-JWT-Authentication/musicapp/views.py
     return render(request, "dashboard.html")
-=======
-    return render(request, "dashboard.html")
->>>>>>> ba151df64496fd9290701bf55554bc8884a122c8:musicapp/views.py
