@@ -59,3 +59,6 @@ def authenticate_credentails(email,password):
 
 def dashboard(request):
     return render(request, "dashboard.html")
+
+def test_api(request):
+    return JsonResponse({"Message":"test"},status=200)
