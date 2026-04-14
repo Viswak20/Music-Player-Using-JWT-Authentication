@@ -7,10 +7,12 @@ from .models import*
 from datetime import datetime, timedelta
 from django.conf import settings
 import time
+import logging
 
-# Create your views here.
+logger = logging.getLogger('django')
 
 def login(request):
+    logger.error("CloudWatch working test 🚀")
     return render(request,"login.html")
 
 @csrf_exempt 
