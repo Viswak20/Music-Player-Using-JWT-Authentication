@@ -1,13 +1,18 @@
+#!/bin/bash
+
 cd /home/ubuntu/Music-Player-Using-JWT-Authentication
 
-echo "Pull latest code"
-git pull origin main
+# create venv if not exists
+if [ ! -d "venv" ]; then
+    python3 -m venv venv
+fi
 
-echo "Activate virtual env"
 source venv/bin/activate
 
-echo "Stop old server"
-pkill -f runserver || true
+pip install -r requirements.txt
 
-echo "Start server"
-nohup python3 manage.py runserver 0.0.0.0:8000 &
+# stop old process
+pkill -f gunicorn || true
+
+# start new app
+nohup gunicorn musicplayer.wsgi:application --bind 0.0.0.0:8000 > output.log 2>&1 &
