@@ -4,6 +4,7 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/Music-Player-Using-JWT-Authentication
+    overwrite: true
 
 hooks:
   AfterInstall:
