@@ -11,3 +11,9 @@ hooks:
     - location: deploy.sh
       timeout: 300
       runas: ubuntu
+
+permissions:
+  - object: /home/ubuntu/Music-Player-Using-JWT-Authentication
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
